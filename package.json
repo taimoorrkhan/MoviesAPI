@@ -5,9 +5,11 @@
   "license": "ISC",
   "author": "Taimoor Khan",
   "type": "module",
-  "main": "app.js",
+  "main": "./app/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "mocha"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
