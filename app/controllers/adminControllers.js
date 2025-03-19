@@ -60,7 +60,7 @@ const updateMovie = async (req, res) => {
             res.status(500).json({ message: err.message });
         }
     };
-    
+
     
 const deleteMovie = async (req, res) => {
     try {
@@ -80,4 +80,4 @@ const deleteMovie = async (req, res) => {
 
 
 
-module.exports = { addNewMovie };
+module.exports = { addNewMovie , updateMovie, deleteMovie };
