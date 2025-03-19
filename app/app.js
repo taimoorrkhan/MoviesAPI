@@ -4,10 +4,11 @@ import mongoose from 'mongoose';
 const app = express();
 
 config();
-
+// not recmonded to use in production just for development of assesment
+const mongoUri = "mongodb+srv://admin:admintmr@moviesdatabase.u942l.mongodb.net/?retryWrites=true&w=majority&appName=MoviesDatabase"
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI, {
+        await mongoose.connect(mongoUri || process.env.MONGO_URI, {
            
         });
         console.log('MongoDB Connected');
