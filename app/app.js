@@ -1,24 +1,16 @@
-import express from 'express';
-import { config} from 'dotenv';
-import mongoose from 'mongoose';
+const express = require('express');
+const { config } = require('dotenv');
+
+const connectDB = require('./config/database');
+const authRoutes = require('./routes/auth');
 const app = express();
 
 config();
 // not recmonded to use in production just for development of assesment
-const mongoUri = "mongodb+srv://admin:admintmr@moviesdatabase.u942l.mongodb.net/?retryWrites=true&w=majority&appName=MoviesDatabase"
-const connectDB = async () => {
-    try {
-        await mongoose.connect(mongoUri || process.env.MONGO_URI, {
-           
-        });
-        console.log('MongoDB Connected');
-    } catch (error) {
-        console.error(`Error: ${error.message}`);
-        process.exit(1);
-    }
-};
 
-connectDB();
+
+app.use('/api/auth', authRoutes);
+
 app.get('/', (req, res) => {
     res.send('Hello World!');
 });
