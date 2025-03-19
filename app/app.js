@@ -1,13 +1,13 @@
 const express = require('express');
 const { config } = require('dotenv');
-
+const bodyParser = require('body-parser');
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/auth');
 const app = express();
 
 config();
 // not recmonded to use in production just for development of assesment
-
+app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
 
