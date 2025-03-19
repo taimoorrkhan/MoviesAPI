@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/auth');
 const movieRoutes = require('./routes/movieRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 const app = express();
 
 config();
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/',movieRoutes);
+app.use('/api/admin',adminRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
