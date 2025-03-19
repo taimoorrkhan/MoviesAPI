@@ -3,6 +3,7 @@ const { config } = require('dotenv');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/auth');
+const movieRoutes = require('./routes/movieRoutes');
 const app = express();
 
 config();
@@ -10,6 +11,7 @@ config();
 app.use(bodyParser.json());
 
 app.use('/api/auth', authRoutes);
+app.use('/api/',movieRoutes);
 
 app.get('/', (req, res) => {
     res.send('Hello World!');
