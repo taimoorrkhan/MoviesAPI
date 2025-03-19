@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/Users');
+const jwt = require('jsonwebtoken');
 
 
 
@@ -40,8 +41,29 @@ const User = require('../models/Users');
 }
 
 const userLogin = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const userExist = await User.findOne({ email });
+        if (!userExist) {
+            return res.status(400).json({ message: "User does not exist" });
+        }
+
+        const passwordFound = await bcrypt.compare(password, userExist.password);
+        if (!passwordFound) {
+            return res.status(400).json({ message: "Invalid password" });
+        }
+        token = jwt.sign({ email: userExist.email, id: userExist._id }, 'test', { expiresIn: "1h" });
+        res.status(200).json({ message : "Logged In", token });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).json({
+            msg: 'Server Error please try again later'
+        });
+    }
 }
 
 
 
-module.exports = userReg;
+module.exports = {userReg, userLogin};
