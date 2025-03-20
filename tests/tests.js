@@ -22,4 +22,12 @@ describe('User and Movie API Tests', function () {
         expect(res.body).to.have.property('message', 'User Registered Successfully!');
     });
 
+    // Check if Password is Hashed
+    it('If Password Dosent Match it IS Hashed', async () => {
+        const user = await User.findOne({ email: testUserData.email });
+        expect(user).to.not.be.null;
+        expect(user.password).to.not.equal(testUserData.password);
+    
+    });
+
 });
