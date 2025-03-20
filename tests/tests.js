@@ -1,0 +1,25 @@
+const request = require('supertest');
+const app = require('../app/app');  
+const User = require('../app/models/Users');  // Import the User model
+const { expect } = require('chai');
+
+const testUserData = {
+    name: "Test User",
+    email: "testuser@example.com",
+    password: "testpassword123",
+};
+describe('User and Movie API Tests', function () {
+
+    before(async () => {
+        await User.deleteOne({ email: testUserData.email });
+    });
+    it('should register a new user', async () => {
+        const res = await request(app)
+            .post('/api/auth/register')
+            .send(testUserData);
+        
+        expect(res.status).to.equal(201);  
+        expect(res.body).to.have.property('message', 'User Registered Successfully!');
+    });
+
+});
