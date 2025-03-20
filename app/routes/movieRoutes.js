@@ -6,8 +6,8 @@ const { getMovies, getMovie,searchMovies} = require('../controllers/moviesContro
 const router = express.Router();
 
 router.get('/movies', getMovies);
+router.get('/movies/search', searchMovies);
 router.get('/movies/:id', getMovie);
-router.get('/search', searchMovies);
 
 
 
