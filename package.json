@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "mocha"
+    "test": "mocha tests/**/tests.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -25,6 +25,7 @@
   "devDependencies": {
     "chai": "^5.2.0",
     "mocha": "^11.1.0",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0"
   }
 }
