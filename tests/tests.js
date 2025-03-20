@@ -46,7 +46,26 @@ describe('User and Movie API Tests', function () {
         expect(res.body).to.have.property('message', 'User already exists');
     });
 
+
+
+    // Login Test
     
+it('should login the user successfully', async () => {
+    await request(app)
+        .post('/api/auth/register')
+        .send(testUserData);
+    
+    const res = await request(app)
+        .post('/api/auth/login')
+        .send({
+            email: testUserData.email,
+            password: testUserData.password
+        });
+    
+    expect(res.status).to.equal(200);
+    expect(res.body).to.have.property('message', 'Logged In');
+    expect(res.body).to.have.property('token');
+});
 
 
 });
