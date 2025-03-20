@@ -30,4 +30,23 @@ describe('User and Movie API Tests', function () {
     
     });
 
+
+    it('should return error if user already exists', async () => {
+        // 1st registration
+        await request(app)
+            .post('/api/auth/register')
+            .send(testUserData);
+        
+        // 2nd registration
+        const res = await request(app)
+            .post('/api/auth/register')
+            .send(testUserData);
+        
+        expect(res.status).to.equal(400);  
+        expect(res.body).to.have.property('message', 'User already exists');
+    });
+
+    
+
+
 });

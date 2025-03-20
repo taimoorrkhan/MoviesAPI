@@ -16,7 +16,7 @@ const jwt = require('jsonwebtoken');
         });
         if (alreadyUser) {
             return res.status(400).json({
-                msg: 'User already exists'
+                message: 'User already exists'
             });
         }
 
