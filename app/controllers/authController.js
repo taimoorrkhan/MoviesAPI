@@ -28,7 +28,7 @@ const jwt = require('jsonwebtoken');
             role
         });
         await newUser.save();
-        res.status(200).json({
+        res.status(201).json({
            message : 'User Registered Successfully!'
         });
 
