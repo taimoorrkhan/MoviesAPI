@@ -12,3 +12,5 @@ const authenticateAdmin = (req, res, next) => {
         next();
     
 };
+
+module.exports = authenticateAdmin;
