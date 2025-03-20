@@ -35,3 +35,8 @@ const startserver = async (PORT) => {
 const PORT = process.env.PORT || 3000;
 
 startserver(PORT);
+
+
+module.exports = 
+    app
+ 
