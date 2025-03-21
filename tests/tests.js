@@ -136,9 +136,19 @@ it('should not allow adding a movie without JWT token', async () => {
     expect(res.status).to.equal(401);  
     expect(res.body).to.have.property('message', 'Access denied');
 });
-
-
-
+it('should return movies based on search query', async () => {
+    await request(app)
+        .post('/api/movies')
+        .send(testMovieData);
+    
+    const res = await request(app)
+        .get('/api/movies/search')
+        .query({ title: 'The Life of David Gale' });
+    
+    expect(res.status).to.equal(200);
+    expect(res.body).to.be.an('array');
+    expect(res.body[0]).to.have.property('title', 'The Life of David Gale');
+});
 
 
 });
