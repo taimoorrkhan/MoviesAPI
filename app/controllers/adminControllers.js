@@ -25,7 +25,9 @@ const addNewMovie =  async (req, res) => {
         });
 
         await movie.save();
-        res.status(201).json(movie);
+        res.status(201).json(
+            { message: 'Movie added successfully' }
+        );
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -69,7 +71,7 @@ const deleteMovie = async (req, res) => {
             return res.status(404).json({ message: 'Movie not found' });
         }
 
-        await movie.remove();
+        await movie.deleteOne();
         res.json({ message: 'Movie removed' });
     } catch (err) {
         res.status(500).json({ message: err.message });
