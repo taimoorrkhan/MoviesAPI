@@ -9,6 +9,7 @@ const testUserData = {
     password: "testpassword123",
 };
 const testMovieData = {
+
     title: "Test Movie",
     year: 2021,
     cast: "Test Actor",
@@ -157,6 +158,17 @@ it('should return an empty array if no movies match the search query', async () 
     expect(res.status).to.equal(200);
     expect(res.body).to.be.an('array').that.is.empty;
 });
+
+it('should return an error for an invalid movie ID', async () => {
+    const res = await request(app)
+        .get('/api/movies/123')
+    
+    expect(res.status).to.equal(400);
+    expect(res.body).to.have.property('errors');
+}
+);
+
+
 
 
 });
