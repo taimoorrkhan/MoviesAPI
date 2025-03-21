@@ -56,7 +56,11 @@ const userLogin = async (req, res) => {
         if (!passwordFound) {
             return res.status(400).json({ message: "Invalid password" });
         }
-        token = jwt.sign({ email: userExist.email, id: userExist._id }, 
+        token = jwt.sign({ email: userExist.email,
+            role: userExist.role,
+            id: userExist._id
+            
+        },
             process.env.JWT_SECRET
             , { expiresIn: "1h" });
         res.status(200).json({ message : "Logged In", token });
@@ -68,7 +72,4 @@ const userLogin = async (req, res) => {
         });
     }
 }
-
-
-
 module.exports = {userReg, userLogin};
