@@ -149,6 +149,14 @@ it('should return movies based on search query', async () => {
     expect(res.body).to.be.an('array');
     expect(res.body[0]).to.have.property('title', 'The Life of David Gale');
 });
+it('should return an empty array if no movies match the search query', async () => {
+    const res = await request(app)
+        .get('/api/movies/search')
+        .query({ title: 'NonExistingMovie' });
+    
+    expect(res.status).to.equal(200);
+    expect(res.body).to.be.an('array').that.is.empty;
+});
 
 
 });
