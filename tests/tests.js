@@ -169,6 +169,37 @@ it('should return an error for an invalid movie ID', async () => {
 );
 
 
+it('should not allow deleting a movie without JWT token', async () => {
+    const movieId = '67dabe1c3831655761098a8d';
 
+    const res = await request(app)
+        .delete(`/api/admin/deleteMovie/${movieId}`); 
+
+    expect(res.status).to.equal(401);  
+    expect(res.body).to.have.property('message', 'Access denied');
+});
+
+// MOVIEW UPDATE WITHOUT TOKEN
+it('should not allow updating a movie without JWT token', async () => {
+    const movieId = '67dabe1c3831655761098a8d';
+    const updatedMovieData = {
+        title: 'Updated Movie Title',
+        year: 2023,
+        cast: ['Updated Actor A', 'Updated Actor B'],
+        genres: ['Drama'],
+        extract: 'An updated movie description',
+        thumbnail: 'https://example.com/updatedmovie.jpg',
+        thumbnail_width: 300,
+        thumbnail_height: 400
+    };
+
+    const res = await request(app)
+        .put(`/api/admin/updateMovie/${movieId}`)
+        .send(updatedMovieData);
+
+    expect(res.status).to.equal(401);  
+    expect(res.body).to.have.property('message', 'Access denied');
+
+});
 
 });
