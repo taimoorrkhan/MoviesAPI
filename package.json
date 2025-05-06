@@ -7,9 +7,10 @@
   "type": "commonjs",
   "main": "./app/app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
-    "test": "mocha tests/**/tests.js"
+  
+  "start": "node app/app.js",
+  "dev": "nodemon app/app.js",
+  "test": "mocha tests/**/tests.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
