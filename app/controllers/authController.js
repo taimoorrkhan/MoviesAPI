@@ -45,31 +45,44 @@ const jwt = require('jsonwebtoken');
 
 const userLogin = async (req, res) => {
     try {
+        console.log("Login route hit");
+    
         const { email, password } = req.body;
-
+        console.log("Email received:", email);
+        console.log("JWT_SECRET:", process.env.JWT_SECRET);
+    
+        if (!email || !password) {
+          return res.status(400).json({ message: "Email and password are required" });
+        }
+    
         const userExist = await User.findOne({ email });
         if (!userExist) {
-            return res.status(400).json({ message: "User does not exist" });
+          console.log("User not found");
+          return res.status(400).json({ message: "User does not exist" });
         }
-
+    
         const passwordFound = await bcrypt.compare(password, userExist.password);
         if (!passwordFound) {
-            return res.status(400).json({ message: "Invalid password" });
+          console.log("Invalid password attempt");
+          return res.status(400).json({ message: "Invalid password" });
         }
-        token = jwt.sign({ email: userExist.email,
+    
+        const token = jwt.sign(
+          {
+            email: userExist.email,
             role: userExist.role,
             id: userExist._id
-            
-        },
-            process.env.JWT_SECRET
-            , { expiresIn: "1h" });
-        res.status(200).json({ message : "Logged In", token });
-    }
-    catch (error) {
-        console.log(error);
-        res.status(500).json({
-            msg: 'Server Error please try again later'
-        });
-    }
+          },
+          process.env.JWT_SECRET,
+          { expiresIn: '1h' }
+        );
+    
+        console.log("User logged in:", userExist.email);
+        res.status(200).json({ message: "Logged In", token });
+    
+      } catch (error) {
+        console.error("Login error:", error);
+        res.status(500).json({ message: "Server Error, please try again later" });
+      }
 }
 module.exports = {userReg, userLogin};
