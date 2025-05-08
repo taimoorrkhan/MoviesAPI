@@ -3,7 +3,6 @@ const Movie = require('../models/Movie.js');
 const {  validationResult } = require('express-validator');
 
 
-
 const addNewMovie =  async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
